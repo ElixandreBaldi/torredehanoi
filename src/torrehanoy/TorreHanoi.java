@@ -19,8 +19,8 @@ public class TorreHanoi {
      * @param args the command line arguments
      */
     public static double tempoInicial;
-    public static int qtdDiscos = 8;
-    public static int tipoBusca = 1;
+    public static int qtdDiscos = 9;
+    public static int tipoBusca = 3;
     public static int contadorVisitas = 0;
     public static DistanciaEstadosFinais distEstados[] = new DistanciaEstadosFinais[2];
     public static int estadoFinal[] = new int[2];
@@ -37,8 +37,8 @@ public class TorreHanoi {
     public static int matrizAdjacencia[][] = new int[qtdEstados][qtdEstados];    
     public static int matrizAdjacenciaCopia[][] = new int[qtdEstados][qtdEstados];   
     public static PossibilidadesPino possibilidades1 = new PossibilidadesPino(new PilhaPinos());
-    public static PossibilidadesPino possibilidades2 = new PossibilidadesPino(new PilhaPinos());
-    public static PossibilidadesPino possibilidades3 = new PossibilidadesPino(new PilhaPinos());
+    //public static PossibilidadesPino possibilidades2 = new PossibilidadesPino(new PilhaPinos());
+    //public static PossibilidadesPino possibilidades3 = new PossibilidadesPino(new PilhaPinos());
     
     public static void printPinos () {        
         for(int i = 0; i < 3; i++) {
@@ -113,16 +113,16 @@ public class TorreHanoi {
             bitMap[possibilidades1.getPossibilidades()[i].getPilhaDiscos()[s].getTamanho()] = true;
         }
         
-        for(int s = 0; s < possibilidades2.getPossibilidades()[j].getPilhaDiscos().length; s++){
-            if(bitMap[possibilidades2.getPossibilidades()[j].getPilhaDiscos()[s].getTamanho()])
+        for(int s = 0; s < possibilidades1.getPossibilidades()[j].getPilhaDiscos().length; s++){
+            if(bitMap[possibilidades1.getPossibilidades()[j].getPilhaDiscos()[s].getTamanho()])
                 return false;
-            bitMap[possibilidades2.getPossibilidades()[j].getPilhaDiscos()[s].getTamanho()] = true;
+            bitMap[possibilidades1.getPossibilidades()[j].getPilhaDiscos()[s].getTamanho()] = true;
         }
         
-        for(int s = 0; s < possibilidades3.getPossibilidades()[k].getPilhaDiscos().length; s++){
-            if(bitMap[possibilidades3.getPossibilidades()[k].getPilhaDiscos()[s].getTamanho()])
+        for(int s = 0; s < possibilidades1.getPossibilidades()[k].getPilhaDiscos().length; s++){
+            if(bitMap[possibilidades1.getPossibilidades()[k].getPilhaDiscos()[s].getTamanho()])
                 return false;
-            bitMap[possibilidades3.getPossibilidades()[k].getPilhaDiscos()[s].getTamanho()] = true;
+            bitMap[possibilidades1.getPossibilidades()[k].getPilhaDiscos()[s].getTamanho()] = true;
         }        
         
         for(int s = 0; s < bitMap.length; s++)
@@ -133,13 +133,13 @@ public class TorreHanoi {
     }
     public static void mapearPossibilidades() {
         for(int i = 0; i < possibilidades1.getPossibilidades().length; i++) {
-            for(int j = 0; j < possibilidades2.getPossibilidades().length; j++) {
-                for(int k = 0; k < possibilidades3.getPossibilidades().length; k++) {
+            for(int j = 0; j < possibilidades1.getPossibilidades().length; j++) {
+                for(int k = 0; k < possibilidades1.getPossibilidades().length; k++) {
                     if(verificarCombinacaoPossibilidade(i,j,k)){
                         
                         pino[0] = possibilidades1.getPossibilidades()[i];
-                        pino[1] = possibilidades2.getPossibilidades()[j];
-                        pino[2] = possibilidades3.getPossibilidades()[k];
+                        pino[1] = possibilidades1.getPossibilidades()[j];
+                        pino[2] = possibilidades1.getPossibilidades()[k];
                         estado[iEstados] = new Estados(pino);
                         reiniciarPinos();
                         iEstados++;
@@ -444,8 +444,8 @@ public class TorreHanoi {
         }                    
         
         possibilidades1 = possibilidadesUmPino(estados, possibilidades1);
-        possibilidades2 = possibilidadesUmPino(estados, possibilidades1);
-        possibilidades3 = possibilidadesUmPino(estados, possibilidades1);
+        //possibilidades2 = possibilidadesUmPino(estados, possibilidades1);
+        //possibilidades3 = possibilidadesUmPino(estados, possibilidades1);
         
         reiniciarPinos();        
         
